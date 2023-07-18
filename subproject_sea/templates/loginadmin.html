@@ -1,0 +1,159 @@
+{% load static %}
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: cornsilk;
+        }
+
+        .form-container {
+            background-color: #f7b74c;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            margin: 50px auto;
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+            color: #fff;
+        }
+
+        p a {
+            text-decoration: none;
+            color: #0276fb;
+        }
+
+        .navbar {
+            background-image: url("{% static 'navbg.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            padding: 10px;
+            text-align: center;
+            justify-content: space-between;
+            align-items: center;
+            display: flex;
+        }
+
+        .logo {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .navbar .title {
+            color: #000000;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 auto; /* Add this line to center the element */
+            width: fit-content; /* Add this line to adjust the width to the content */
+        }
+
+        .fullscreen-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 60%;
+        }
+
+        .fullscreen-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .login-image {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .login-image img {
+            width: 100px;
+            height: auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <body>
+        <div class="navbar">
+            <a href="{% url 'homepage' %}">
+                <img src="{% static 'kpmb.gif' %}" class="logo">
+            </a>
+            <h2 class="title">KPMB Excellence Portal</h2>
+        </div>
+        
+        <div class="fullscreen-bg">
+            <img src="{% static 'hp.jpg' %}" alt="Background Image">
+        </div>
+        
+        {% block content %}
+            <div class="form-container">
+                <h1 style="text-align: center;">Login Admin</h1>
+                <div class="login-image">
+                    <img src="{% static 'cg.png' %}" alt="Login Image">
+                </div>
+                <form method="POST" action="{% url 'loginadmin' %}" class="form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="form-label">Admin id</label>
+                        <input type="text" class="form-control" name="adminid" placeholder="Enter Your Admin id">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="apassword" placeholder="Enter Your Password">
+                    </div>
+                    <a href="{% url 'viewachievement' %}">
+                        <button type="submit" class="btn-primary">Log in</button>
+                    </a>
+                    <p>New user? <a href="{% url 'registeradmin' %}">Register</a></p>
+                </form>
+            </div>
+        {% endblock %}
+        
+
+</body>
+</html>

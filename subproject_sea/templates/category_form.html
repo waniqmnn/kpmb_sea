@@ -1,0 +1,244 @@
+{% load static %}
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: cornsilk;
+}
+
+.content {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+color: #050505;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
+}
+
+.navbar {
+background-image: url("{% static 'navbg.jpg' %}");
+background-size: cover;
+background-position: center;
+opacity: 80%;
+padding: 10px;
+margin-bottom: 20px;
+text-align: center;
+justify-content: space-between;
+align-items: center;
+display: flex;
+}
+
+
+.logo {
+height: 50px;
+margin-right: 10px;
+}
+
+.navbar .title {
+color: #fff;
+font-size: 25px;
+font-weight: bold;
+text-align: center;
+}
+
+.button {
+text-align: center;
+margin-top: 1.5px;
+}
+
+.button a {
+display: inline-block;
+text-decoration: none;
+color: #fff;
+background-color: #333;
+padding: 10px 20px;
+border-radius: 5px;
+transition: background-color 0.3s ease;
+}
+
+.button a:hover {
+background-color: #555;
+}
+        
+.navbar {
+  background-image: url("{% static 'navbg.jpg' %}");
+  background-size: cover;
+  background-position: center;
+  opacity: 80%;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.navbar .title {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button {
+  text-align: center;
+  margin-top: 1.5px;
+}
+
+.button a {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background-color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.button a:hover {
+  background-color: #555;
+}
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f7b74c;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.container h1 {
+  text-align: center;
+  color: #333;
+}
+
+  .container .form-group {
+    margin-bottom: 20px;
+  }
+
+  .container .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .container .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .container button {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .container button:hover {
+    background-color: #555;
+  }
+
+  /* Reset default table styles */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  /* Table header styles */
+  thead th {
+    background-color: #f7b74c;
+    color: #333;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  /* Table row styles */
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr:hover {
+    background-color: #e9e9e9;
+  }
+
+  /* Table cell styles */
+  td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  /* Line between columns */
+  td:not(:last-child) {
+    border-right: 1px solid #ccc;
+  }
+</style>
+<body>
+  <div class="navbar">
+    <a href="{% url 'homepage' %}">
+      <img src="{% static 'kpmb.gif' %}" class="logo">
+    </a>
+    <div class="button">
+      <a href="{% url 'viewachievement' %}">Student List</a>
+      <a href="{% url 'studentdata' %}">Student</a>
+      <a href="{% url 'admindata' %}">Admin</a>
+      <a href="{% url 'searchpage' %}">Search Student</a>
+      <a href="{% url 'create_achievment' %}">Create Achievement</a>
+      <a href="{% url 'create_category' %}">Create Category</a>
+      <a href="{% url 'create_level' %}">Create Level</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Create Category</h1>
+    <form method="post" action="{% url 'create_category' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="Categoryid">Category ID:</label>
+        <input type="text" name="Categoryid" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="Categorydescription">Category Description:</label>
+        <textarea name="Categorydescription" class="form-control" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Category</button>
+    </form>
+  </div>
+
+<br>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category ID</th>
+        <th>Category Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category in categories %}
+      <tr>
+        <td>{{ category.Categoryid }}</td>
+        <td>{{ category.Categorydescription }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>

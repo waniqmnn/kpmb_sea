@@ -1,0 +1,135 @@
+{% load static %}
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: cornsilk;
+  }
+
+  .navbar {
+    background-image: url("{% static 'navbg.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    opacity: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+
+  .logo {
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .navbar .title {
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .button {
+    text-align: center;
+    margin-top: 1.5px;
+  }
+
+  .button a {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .button a:hover {
+    background-color: #555;
+  }
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #050505;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .update-student-form {
+    max-width: 500px;
+    padding: 20px;
+    background-color: #f7b74c;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+
+  .update-student-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .update-student-form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .update-student-form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .update-student-form button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
+
+<div class="navbar">
+  <a href="{% url 'homepage' %}">
+    <img src="{% static 'kpmb.gif' %}" class="logo">
+  </a>
+  <div class="button">
+    <a href="{% url 'viewachievement' %}">Student List</a>
+    <a href="{% url 'studentdata' %}">Student</a>
+    <a href="{% url 'admindata' %}">Admin</a>
+    <a href="{% url 'searchpage' %}">Search Student</a>
+    <a href="{% url 'create_achievment' %}">Create Achievement</a>
+    <a href="{% url 'create_category' %}">Create Category</a>
+    <a href="{% url 'create_level' %}">Create Level</a>
+  </div>
+</div>
+
+<div class="content">
+  <h1>Update Student Data</h1>
+
+  <form class="update-student-form" method="post" action="{% url 'updatestudent' student.Studentid %}">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="{{ student.Studentname }}" required><br>
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" name="phone" value="{{ student.Studentphone }}" required><br>
+
+    <label for="programme">Program:</label>
+    <input type="text" name="programme" value="{{ student.Studentprogramme }}" required><br>
+
+    <button type="submit">Update</button>
+  </form>
+</div>

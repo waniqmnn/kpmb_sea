@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: cornsilk;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        p {
+            text-align: center;
+        }
+        
+        .form-box {
+            border: 1px solid #000000;
+            background-color: #f7b74c;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        input, select {
+            display: block;
+            margin: 10px auto;
+            padding: 5px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        button {
+            text-decoration: none;
+            position: relative;
+            border: none;
+            font-size: 14px;
+            font-family: inherit;
+            color: #ffffff;
+            width: 9em;
+            height: 3em;
+            line-height: 2em;
+            text-align: center;
+            background-color: #007bff;
+            border-radius: 30px;
+            z-index: 1;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #919191;
+        }
+        
+        p a {
+            text-decoration: none;
+            color: #0276fb;
+        }
+
+        .navbar {
+        background-image: url("{% static 'navbg.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        padding: 10px;
+        text-align: center;
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+        }
+
+
+        .logo {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .navbar .title {
+            color: #070707;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 auto; /* Add this line to center the element */
+            width: fit-content; /* Add this line to adjust the width to the content */
+        }
+
+        .fullscreen-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 60%;
+
+        }
+        
+        .fullscreen-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'homepage' %}">
+            <img src="{% static 'kpmb.gif' %}" class="logo">
+        </a>
+        <h2 class="title">KPMB Excellence Portal</h2>
+    </div>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+    <div class="fullscreen-bg">
+        <img src="{% static 'hp.jpg' %}" alt="Background Image">
+    </div>
+    <div class="form-box">
+        <h1>Student Registration</h1>
+        <form method="post" action="{% url 'registerstudents' %}">
+            {% csrf_token %}
+            Student ID:
+            <input type="text" name="Studentid" placeholder="Student ID" required><br>
+            Name:
+            <input type="text" name="Studentname" placeholder="Student Name" required><br>
+            Password:
+            <input type="password" name="Spassword" placeholder="Password" required><br>
+            Programme:
+            <input type="text" name="Studentprogramme" placeholder="Programme" required><br>
+            Phone No.:
+            <input type="text" name="Studentphone" placeholder="Phone" required><br>
+            <a href="{% url 'loginstudents' %}">
+                <button type="submit">Register Student</button>
+            </a>
+        </form>
+        <p>Already have an account? <a href="{% url 'loginstudents' %}">Login</a></p>
+    </div>
+</body>
+</html>
